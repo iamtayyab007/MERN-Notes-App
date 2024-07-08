@@ -12,14 +12,17 @@ function App() {
 
   console.log(notes);
 
-  const getNotes = async () => {
-    const response = await fetch("http://localhost:3000/notes");
-    const data = await response.json();
-    //console.log(data);
-    setNotes(data);
-  };
-
   useEffect(() => {
+    const getNotes = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/notes");
+        const data = await response.json();
+        //console.log(data);
+        setNotes(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getNotes();
   }, []);
 
